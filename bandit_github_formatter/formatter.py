@@ -135,7 +135,7 @@ def comment_on_pr(message):
             }
 
             request_path = (
-                f"{os.getenv("GITHUB_API_URL")}/repos/{event['repository']['full_name']}/issues/{event['number']}/comments")
+                f"https://api.github.com/repos/{event['repository']['full_name']}/issues/{event['number']}/comments")
 
             requests.post(request_path, headers=headers_dict, json={"body": message})
 

@@ -122,6 +122,7 @@ def get_results(manager, sev_level, conf_level, lines):
 def comment_on_pr(message):
 
     token = os.getenv("INPUT_GITHUB_TOKEN")
+    api_url = os.getenv("GITHUB_API_URL")
     if not token:
         print(message)
         return
@@ -135,7 +136,7 @@ def comment_on_pr(message):
             }
 
             request_path = (
-                f"https://api.github.com/repos/{event['repository']['full_name']}/issues/{event['number']}/comments")
+                f"{api_url}/repos/{event['repository']['full_name']}/issues/{event['number']}/comments")
 
             requests.post(request_path, headers=headers_dict, json={"body": message})
 
